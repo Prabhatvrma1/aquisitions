@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  neon-local:
+    image: neondatabase/neon_local:latest
+    container_name: acquisitions-neon-local
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env.development
+    restart: unless-stopped
+  neon-http-proxy:
+    image: ghcr.io/timowilhelm/local-neon-http-proxy:main
+    container_name: acquisitions-neon-http-proxy
+    environment:
+      - PG_CONNECTION_STRING=postgres://neondb_owner@neon-local:5432/neondb?sslmode=disable
+    ports:
+      - "4444:4444"
+    depends_on:
+      - neon-local
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      target: dev
+    container_name: acquisitions-app-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env.development
+    environment:
+      - NODE_ENV=development
+      - NEON_PROXY_HOST=neon-http-proxy
+    depends_on:
+      - neon-local
+      - neon-http-proxy
+    restart: unless-stopped

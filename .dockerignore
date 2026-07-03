@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+logs
+.env
+.env.*
+.git
+.gitignore
+.prettier*
+eslint.config.js
+README.md
+architecture_explainer.md
+test-routes.mjs

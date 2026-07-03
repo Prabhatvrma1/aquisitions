@@ -88,3 +88,5 @@
 {"ip":"::ffff:127.0.0.1","level":"warn","message":"Rate limit exceeded","path":"/health","role":"guest","service":"acquisitions-api","timestamp":"2026-07-03T11:09:39.167Z","userAgent":"node"}
 {"ip":"::ffff:127.0.0.1","level":"warn","message":"Rate limit exceeded","path":"/health","role":"guest","service":"acquisitions-api","timestamp":"2026-07-03T11:09:39.309Z","userAgent":"node"}
 {"level":"info","message":"::ffff:127.0.0.1 - - [03/Jul/2026:11:10:38 +0000] \"GET /health HTTP/1.1\" 200 74 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-03T11:10:38.476Z"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [03/Jul/2026:12:08:44 +0000] \"GET /health HTTP/1.1\" 200 77 \"-\" \"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-IN) WindowsPowerShell/5.1.26100.8655\"","service":"acquisitions-api","timestamp":"2026-07-03T12:08:44.609Z"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [03/Jul/2026:12:09:25 +0000] \"GET /health HTTP/1.1\" 200 75 \"-\" \"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-IN) WindowsPowerShell/5.1.26100.8655\"","service":"acquisitions-api","timestamp":"2026-07-03T12:09:25.363Z"}

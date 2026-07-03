@@ -70,6 +70,56 @@ A RESTful API built with Express.js for managing user authentication and acquisi
 
    The server will start at `http://localhost:3000` with file-watching enabled.
 
+## Docker Setup & Environments
+
+The application supports Dockerized deployments for both development and production. The key difference lies in how they connect to the database:
+- **Development:** Runs the application alongside **Neon Local** (a local Postgres proxy that interacts with Neon Cloud to spin up ephemeral database branches automatically).
+- **Production:** Connects directly to the actual **Neon Cloud Database**.
+
+### 1. Development (Local with Neon Local)
+
+Neon Local acts as a bridge that creates an ephemeral database branch when your environment starts and deletes it when it stops, ensuring your local environment has its own isolated database playground.
+
+#### Prerequisites for Dev:
+Make sure you have your Neon API Key, Project ID, and Parent Branch ID from your [Neon Dashboard](https://console.neon.tech).
+
+#### Setup Steps:
+1. Open [.env.development](file:///.env.development) and fill in your Neon details:
+   - `NEON_API_KEY`: Account Settings -> API Keys
+   - `NEON_PROJECT_ID`: From your project's dashboard URL (e.g. `ep-xxx-yyy`)
+   - `PARENT_BRANCH_ID`: The branch to fork (usually `main`)
+
+2. Spin up the environment using Docker Compose:
+   ```bash
+   docker compose --env-file .env.development -f docker-compose.dev.yml up --build
+   ```
+
+This starts three services:
+1. `neon-local` — The local Neon proxy. It reads your credentials and manages database branching.
+2. `neon-http-proxy` — Translates HTTP database queries from the `@neondatabase/serverless` driver to standard TCP queries for `neon-local`.
+3. `app` — The backend application in development mode (hot-reloading enabled).
+
+When you run `docker compose -f docker-compose.dev.yml down`, Neon Local will automatically delete the ephemeral dev branch, avoiding database clutter.
+
+---
+
+### 2. Production (Neon Cloud)
+
+In production, the application connects directly to the serverless Neon Cloud database without any local proxies.
+
+#### Setup Steps:
+1. Open [.env.production](file:///.env.production) and configure:
+   - `DATABASE_URL`: The actual Neon Cloud connection string (`postgres://...neon.tech...`)
+   - `JWT_SECRET`: A secure key for production JWT tokens.
+
+2. Run the production container:
+   ```bash
+   docker compose --env-file .env.production -f docker-compose.prod.yml up --build -d
+   ```
+
+This builds a streamlined, production-grade image (pruning development dependencies) and starts the Express server.
+
+
 ## Project Structure
 
 ```
