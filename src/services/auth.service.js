@@ -1,8 +1,7 @@
-import { error } from "winston";
-import logger from "../config/logger.js "
+import logger from "../config/logger.js"
 import bcrypt from 'bcrypt';
 import { db } from "../config/database.js";
-import { users } from "../db/schema.js";
+import { users } from "../models/user.model.js"
 import { eq } from "drizzle-orm";
 
 export const hashPasword = async (password) => {
@@ -11,18 +10,18 @@ export const hashPasword = async (password) => {
         return await hashedPasword;
     } catch (e) {
         logger.error(`erorr while hashing the password: ${e}`);
-        throw new error(" error handling");
+        throw new Error(" error handling");
     }
 }
 
 
 export const createUser = async ({ name, email, password, role = 'user' }) => {
     try {
-        const existingUser = db.select().from(users).where(
-            eq(users.email, email).limit(1)
-        )
+        const existingUser = await db.select().from(users).where(
+            eq(users.email, email)
+        ).limit(1)
         if (existingUser.length > 0) {
-            throw new error("user already exists");
+            throw new Error("user already exists");
 
         }
 
@@ -42,12 +41,14 @@ export const createUser = async ({ name, email, password, role = 'user' }) => {
         })
 
 
-        return newUser;
+        logger.info(`user ${newUser.email} created sucessfullt`);
 
+        return newUser;
     }
     catch (e) {
         logger.error(`Error  created the user ${e}`);
-        throw new error(e);
+        throw new Error(e);
     }
 
 }
+
