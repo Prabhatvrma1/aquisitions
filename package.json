@@ -25,7 +25,9 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "dev:docker": "sh ./scripts/setup-docker.sh",
-    "dev:docker-win": "powershell -ExecutionPolicy Bypass -File ./scripts/setup-docker-win.ps1"
+    "dev:docker-win": "powershell -ExecutionPolicy Bypass -File ./scripts/setup-docker-win.ps1",
+    "prod:docker": "sh ./scripts/prod.sh",
+    "prod:docker-win": "powershell -ExecutionPolicy Bypass -File ./scripts/prod-win.ps1"
   },
   "repository": {
     "type": "git",

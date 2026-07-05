@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   neon-local:
     image: neondatabase/neon_local:latest
@@ -9,10 +7,12 @@ services:
     env_file:
       - .env.development
     restart: unless-stopped
+
   neon-http-proxy:
     image: ghcr.io/timowilhelm/local-neon-http-proxy:main
     container_name: acquisitions-neon-http-proxy
     environment:
+      # Must use neon:npg — neon-local's internal PgBouncer only accepts this user
       - PG_CONNECTION_STRING=postgres://neon:npg@neon-local:5432/neondb?sslmode=disable
     ports:
       - "4444:4444"
@@ -34,8 +34,9 @@ services:
       - .env.development
     environment:
       - NODE_ENV=development
+      # Tells database.js to route Neon serverless driver through the HTTP proxy
       - NEON_PROXY_HOST=neon-http-proxy
     depends_on:
       - neon-local
       - neon-http-proxy
-    restart: unless-stopped
+    # No restart policy — we control lifecycle via the setup script
