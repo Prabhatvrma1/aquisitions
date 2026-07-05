@@ -13,7 +13,7 @@ services:
     image: ghcr.io/timowilhelm/local-neon-http-proxy:main
     container_name: acquisitions-neon-http-proxy
     environment:
-      - PG_CONNECTION_STRING=postgres://neondb_owner@neon-local:5432/neondb?sslmode=disable
+      - PG_CONNECTION_STRING=postgres://neon:npg@neon-local:5432/neondb?sslmode=disable
     ports:
       - "4444:4444"
     depends_on:
