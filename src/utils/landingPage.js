@@ -33,6 +33,7 @@ const landingPage = `<!DOCTYPE html>
             align-items: center;
             background-image: var(--accent-glow);
             overflow-x: hidden;
+            padding: 2rem 0;
         }
 
         .container {
@@ -130,6 +131,7 @@ const landingPage = `<!DOCTYPE html>
             display: flex;
             gap: 12px;
             justify-content: center;
+            margin-bottom: 1.5rem;
         }
 
         .btn {
@@ -168,6 +170,107 @@ const landingPage = `<!DOCTYPE html>
             transform: translateY(-1px);
         }
 
+        /* Endpoints section styles */
+        .endpoints-section {
+            text-align: left;
+            margin-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 2rem;
+        }
+
+        .endpoints-section h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #ffffff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .endpoints-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .endpoint-group h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #e5e7eb;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .endpoint-group h3 code {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #a5b4fc;
+        }
+
+        .endpoint-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            transition: all 0.2s ease;
+            margin-bottom: 0.5rem;
+        }
+
+        .endpoint-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.08);
+            transform: translateX(4px);
+        }
+
+        .method {
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 6px;
+            min-width: 65px;
+            text-align: center;
+        }
+
+        .method.get { background: rgba(59, 130, 246, 0.1); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.2); }
+        .method.post { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .method.patch { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+        .method.delete { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
+
+        .path {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #f3f4f6;
+            font-weight: 600;
+        }
+
+        .auth {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: auto;
+        }
+
+        .auth.public { background: rgba(156, 163, 175, 0.1); color: #9ca3af; border: 1px solid rgba(156, 163, 175, 0.2); }
+        .auth.secure { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; border: 1px solid rgba(139, 92, 246, 0.2); }
+
+        .desc {
+            width: 100%;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            padding-left: 77px;
+        }
+
         footer {
             margin-top: 2.5rem;
             font-size: 0.75rem;
@@ -183,6 +286,13 @@ const landingPage = `<!DOCTYPE html>
 
         footer a:hover {
             text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .auth { margin-left: 0; }
+            .desc { padding-left: 0; margin-top: 8px; }
+            .endpoint-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .buttons { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
@@ -210,6 +320,70 @@ const landingPage = `<!DOCTYPE html>
             <a href="/health" class="btn btn-primary">Check Health</a>
             <a href="/api" class="btn btn-secondary">API Metadata</a>
             <a href="https://github.com/Prabhatvrma1/production-ready-node-api" target="_blank" class="btn btn-secondary">GitHub Repository</a>
+        </div>
+
+        <div class="endpoints-section">
+            <h2>API Endpoint Explorer</h2>
+            <div class="endpoints-list">
+                <!-- Group: Auth -->
+                <div class="endpoint-group">
+                    <h3>Authentication — <code>/api/auth</code></h3>
+                    
+                    <div class="endpoint-item">
+                        <span class="method post">POST</span>
+                        <code class="path">/api/auth/sign-up</code>
+                        <span class="auth public">Public</span>
+                        <div class="desc">Registers a new user inside the database</div>
+                    </div>
+                    
+                    <div class="endpoint-item">
+                        <span class="method post">POST</span>
+                        <code class="path">/api/auth/sign-in</code>
+                        <span class="auth public">Public</span>
+                        <div class="desc">Authenticates user and returns an HttpOnly token cookie</div>
+                    </div>
+
+                    <div class="endpoint-item">
+                        <span class="method post">POST</span>
+                        <code class="path">/api/auth/sign-out</code>
+                        <span class="auth public">Public</span>
+                        <div class="desc">Clears the active authentication session cookie</div>
+                    </div>
+                </div>
+
+                <!-- Group: Users -->
+                <div class="endpoint-group">
+                    <h3>Users Management — <code>/api/users</code></h3>
+                    
+                    <div class="endpoint-item">
+                        <span class="method get">GET</span>
+                        <code class="path">/api/users</code>
+                        <span class="auth secure">Auth Required</span>
+                        <div class="desc">Retrieves a list of all registered users</div>
+                    </div>
+                    
+                    <div class="endpoint-item">
+                        <span class="method get">GET</span>
+                        <code class="path">/api/users/:id</code>
+                        <span class="auth secure">Auth Required</span>
+                        <div class="desc">Retrieves a specific user profile by their database ID</div>
+                    </div>
+
+                    <div class="endpoint-item">
+                        <span class="method patch">PATCH</span>
+                        <code class="path">/api/users/:id</code>
+                        <span class="auth secure">Self / Admin</span>
+                        <div class="desc">Updates user details (Role updates restricted to Admins)</div>
+                    </div>
+
+                    <div class="endpoint-item">
+                        <span class="method delete">DELETE</span>
+                        <code class="path">/api/users/:id</code>
+                        <span class="auth secure">Self / Admin</span>
+                        <div class="desc">Permanently removes a user from the database</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <footer>
