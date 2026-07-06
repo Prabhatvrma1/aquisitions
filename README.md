@@ -34,17 +34,18 @@ graph TD
     API -->|JWT| Auth[Authentication]
     API -->|TCP/SQL| Proxy[Neon HTTP Proxy / Local]
     Proxy -->|TCP/SQL| DB[(Neon PostgreSQL)]
-    
+
     subgraph Docker Containers
         API
         Proxy
         LocalDB[(Neon Local DB)]
     end
-    
+
     Proxy -.->|Dev Only| LocalDB
 ```
 
 ---
+
 ## Project Structure
 
 ```
@@ -387,7 +388,7 @@ In non-production environments, logs are also printed to the console with color 
 
 ## Screenshots
 
-*(Add screenshots of your API responses, swagger docs, or database GUI here)*
+_(Add screenshots of your API responses, swagger docs, or database GUI here)_
 
 ---
 
