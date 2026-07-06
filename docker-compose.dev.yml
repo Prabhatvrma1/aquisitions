@@ -3,7 +3,7 @@ services:
     image: neondatabase/neon_local:latest
     container_name: acquisitions-neon-local
     ports:
-      - "5432:5432"
+      - '5432:5432'
     env_file:
       - .env.development
     restart: unless-stopped
@@ -15,7 +15,7 @@ services:
       # Connects to neon-local's PgBouncer using the local credentials
       - PG_CONNECTION_STRING=postgres://neon:npg@neon-local:5432/neondb?sslmode=disable
     ports:
-      - "4444:4444"
+      - '4444:4444'
     depends_on:
       - neon-local
     restart: unless-stopped
@@ -26,7 +26,7 @@ services:
       target: dev
     container_name: acquisitions-app-dev
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
       - .:/app
       - /app/node_modules

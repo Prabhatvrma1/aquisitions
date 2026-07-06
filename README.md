@@ -11,18 +11,18 @@ A production-ready RESTful API built with **Express.js** for managing user authe
 
 ## Tech Stack
 
-| Category       | Technology                                   |
-| -------------- | -------------------------------------------- |
-| Runtime        | Node.js 20 (ES Modules)                      |
-| Framework      | Express.js v5                                |
-| Database       | PostgreSQL via Neon Serverless               |
-| ORM            | Drizzle ORM                                  |
-| Auth           | JWT (jsonwebtoken) + bcrypt                  |
-| Validation     | Zod                                          |
-| Logging        | Winston + Morgan                             |
-| Security       | Helmet, CORS, Arcjet (rate-limiting + bots)  |
-| Containerization | Docker + Docker Compose                    |
-| CI/CD          | GitHub Actions                               |
+| Category         | Technology                                  |
+| ---------------- | ------------------------------------------- |
+| Runtime          | Node.js 20 (ES Modules)                     |
+| Framework        | Express.js v5                               |
+| Database         | PostgreSQL via Neon Serverless              |
+| ORM              | Drizzle ORM                                 |
+| Auth             | JWT (jsonwebtoken) + bcrypt                 |
+| Validation       | Zod                                         |
+| Logging          | Winston + Morgan                            |
+| Security         | Helmet, CORS, Arcjet (rate-limiting + bots) |
+| Containerization | Docker + Docker Compose                     |
+| CI/CD            | GitHub Actions                              |
 
 ---
 
@@ -117,6 +117,7 @@ npm run dev:docker
 ```
 
 This starts three containers:
+
 1. `neon-local` — Neon Local proxy, manages ephemeral DB branching.
 2. `neon-http-proxy` — Bridges `@neondatabase/serverless` HTTP driver to Neon Local TCP.
 3. `app` — Express server with hot-reload (`node --watch`).
@@ -143,6 +144,7 @@ npm run prod:docker-win
 ```
 
 This script will:
+
 1. Run `drizzle-kit migrate` to push schema changes to Neon Cloud.
 2. Build a lean production Docker image (no dev dependencies).
 3. Start the container in detached mode.
@@ -202,14 +204,14 @@ This script will:
 
 ---
 
-### Users — `/api/users` *(requires auth cookie)*
+### Users — `/api/users` _(requires auth cookie)_
 
-| Method | Endpoint          | Roles Allowed          | Description                            |
-| ------ | ----------------- | ---------------------- | -------------------------------------- |
-| GET    | `/api/users`      | Any authenticated user | Get all users                          |
-| GET    | `/api/users/:id`  | Any authenticated user | Get a user by ID                       |
-| PATCH  | `/api/users/:id`  | Self or Admin          | Update user fields (role: Admin only)  |
-| DELETE | `/api/users/:id`  | Self or Admin          | Delete a user                          |
+| Method | Endpoint         | Roles Allowed          | Description                           |
+| ------ | ---------------- | ---------------------- | ------------------------------------- |
+| GET    | `/api/users`     | Any authenticated user | Get all users                         |
+| GET    | `/api/users/:id` | Any authenticated user | Get a user by ID                      |
+| PATCH  | `/api/users/:id` | Self or Admin          | Update user fields (role: Admin only) |
+| DELETE | `/api/users/:id` | Self or Admin          | Delete a user                         |
 
 All routes require a valid `token` cookie (obtained from sign-in / sign-up).
 
@@ -220,7 +222,14 @@ All routes require a valid `token` cookie (obtained from sign-in / sign-up).
 {
   "message": "Users retrieved successfully",
   "users": [
-    { "id": 1, "name": "John Doe", "email": "john@example.com", "role": "user", "created_at": "...", "updated_at": "..." }
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "role": "user",
+      "created_at": "...",
+      "updated_at": "..."
+    }
   ]
 }
 ```
@@ -231,7 +240,12 @@ All routes require a valid `token` cookie (obtained from sign-in / sign-up).
 // Response 200
 {
   "message": "User retrieved successfully",
-  "user": { "id": 1, "name": "John Doe", "email": "john@example.com", "role": "user" }
+  "user": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "user"
+  }
 }
 ```
 
@@ -259,13 +273,13 @@ All fields are optional. Non-admins cannot change `role`.
 
 **Error Responses:**
 
-| Status | Meaning                                       |
-| ------ | --------------------------------------------- |
-| 400    | Validation error (bad ID or body)             |
-| 401    | Not authenticated (missing/invalid token)     |
-| 403    | Forbidden (not your account or not an admin)  |
-| 404    | User not found                                |
-| 409    | Email already in use                          |
+| Status | Meaning                                      |
+| ------ | -------------------------------------------- |
+| 400    | Validation error (bad ID or body)            |
+| 401    | Not authenticated (missing/invalid token)    |
+| 403    | Forbidden (not your account or not an admin) |
+| 404    | User not found                               |
+| 409    | Email already in use                         |
 
 ---
 
@@ -310,22 +324,22 @@ Triggered on push to `main` or manually via `workflow_dispatch`.
 
 ## Available Scripts
 
-| Script                   | Description                                 |
-| ------------------------ | ------------------------------------------- |
-| `npm run dev`            | Start dev server with hot-reload            |
-| `npm run start`          | Start production server                     |
-| `npm run lint`           | Run ESLint                                  |
-| `npm run lint:fix`       | Auto-fix ESLint issues                      |
-| `npm run format`         | Format code with Prettier                   |
-| `npm run format-check`   | Check code formatting (no writes)           |
-| `npm run db:push`        | Push schema directly to database            |
-| `npm run db:generate`    | Generate migration files                    |
-| `npm run db:migrate`     | Run pending migrations                      |
-| `npm run db:studio`      | Open Drizzle Studio GUI                     |
-| `npm run dev:docker-win` | Start full dev stack on Windows             |
-| `npm run dev:docker`     | Start full dev stack on Mac/Linux           |
-| `npm run prod:docker-win`| Start production stack on Windows          |
-| `npm run prod:docker`    | Start production stack on Mac/Linux        |
+| Script                    | Description                         |
+| ------------------------- | ----------------------------------- |
+| `npm run dev`             | Start dev server with hot-reload    |
+| `npm run start`           | Start production server             |
+| `npm run lint`            | Run ESLint                          |
+| `npm run lint:fix`        | Auto-fix ESLint issues              |
+| `npm run format`          | Format code with Prettier           |
+| `npm run format-check`    | Check code formatting (no writes)   |
+| `npm run db:push`         | Push schema directly to database    |
+| `npm run db:generate`     | Generate migration files            |
+| `npm run db:migrate`      | Run pending migrations              |
+| `npm run db:studio`       | Open Drizzle Studio GUI             |
+| `npm run dev:docker-win`  | Start full dev stack on Windows     |
+| `npm run dev:docker`      | Start full dev stack on Mac/Linux   |
+| `npm run prod:docker-win` | Start production stack on Windows   |
+| `npm run prod:docker`     | Start production stack on Mac/Linux |
 
 ---
 
@@ -342,13 +356,13 @@ In non-production environments, logs are also printed to the console with color 
 
 ## GitHub Secrets Required
 
-| Secret              | Used by                  | Description                              |
-| ------------------- | ------------------------ | ---------------------------------------- |
-| `DOCKER_USERNAME`   | docker-build-and-push    | Docker Hub username                      |
-| `DOCKER_PASSWORD`   | docker-build-and-push    | Docker Hub password / access token for `prabhatsoni16` |
-| `TEST_DATABASE_URL` | tests                    | PostgreSQL URL for test environment      |
-| `JWT_SECRET`        | tests                    | Secret key for JWT in tests              |
-| `ARCJET_KEY`        | tests                    | Arcjet API key for security middleware   |
+| Secret              | Used by               | Description                                            |
+| ------------------- | --------------------- | ------------------------------------------------------ |
+| `DOCKER_USERNAME`   | docker-build-and-push | Docker Hub username                                    |
+| `DOCKER_PASSWORD`   | docker-build-and-push | Docker Hub password / access token for `prabhatsoni16` |
+| `TEST_DATABASE_URL` | tests                 | PostgreSQL URL for test environment                    |
+| `JWT_SECRET`        | tests                 | Secret key for JWT in tests                            |
+| `ARCJET_KEY`        | tests                 | Arcjet API key for security middleware                 |
 
 ---
 
