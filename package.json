@@ -1,7 +1,7 @@
 {
   "name": "aquisitions",
   "version": "1.0.0",
-  "description": "",
+  "description": "RESTful Express.js API with Docker, Drizzle ORM, Neon PostgreSQL, JWT Authentication and CI/CD (WIP).",
   "main": "index.js",
   "imports": {
     "#controller/*": "./src/controller/*",
@@ -21,6 +21,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "build": "npm run db:migrate",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",

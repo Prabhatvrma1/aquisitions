@@ -26,6 +26,25 @@ A production-ready RESTful API built with **Express.js** for managing user authe
 
 ---
 
+## Architecture Diagram
+
+```mermaid
+graph TD
+    Client([Client / Frontend]) -->|HTTP/REST| API[Express.js API]
+    API -->|JWT| Auth[Authentication]
+    API -->|TCP/SQL| Proxy[Neon HTTP Proxy / Local]
+    Proxy -->|TCP/SQL| DB[(Neon PostgreSQL)]
+    
+    subgraph Docker Containers
+        API
+        Proxy
+        LocalDB[(Neon Local DB)]
+    end
+    
+    Proxy -.->|Dev Only| LocalDB
+```
+
+---
 ## Project Structure
 
 ```
@@ -363,6 +382,22 @@ In non-production environments, logs are also printed to the console with color 
 | `TEST_DATABASE_URL` | tests                 | PostgreSQL URL for test environment                    |
 | `JWT_SECRET`        | tests                 | Secret key for JWT in tests                            |
 | `ARCJET_KEY`        | tests                 | Arcjet API key for security middleware                 |
+
+---
+
+## Screenshots
+
+*(Add screenshots of your API responses, swagger docs, or database GUI here)*
+
+---
+
+## Future Roadmap
+
+- [ ] Add Redis for caching API responses
+- [ ] Implement Swagger/OpenAPI documentation
+- [ ] Add OAuth2 login (Google/GitHub)
+- [ ] Set up CD to automatically deploy to AWS/Render/DigitalOcean
+- [ ] Add comprehensive E2E tests
 
 ---
 
