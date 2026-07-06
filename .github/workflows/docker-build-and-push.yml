@@ -20,14 +20,14 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: prabhatsoni16
+          username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Extract Docker metadata (tags & labels)
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: prabhatsoni16/aquisitions
+          images: ${{ secrets.DOCKER_USERNAME }}/aquisitions
           tags: |
             # Branch name tag (e.g. main)
             type=ref,event=branch
@@ -55,7 +55,7 @@ jobs:
         run: |
           echo "## 🐳 Docker Image Published" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Repository:** \`prabhatsoni16/aquisitions\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Repository:** \`${{ secrets.DOCKER_USERNAME }}/aquisitions\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Published Tags:**" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
