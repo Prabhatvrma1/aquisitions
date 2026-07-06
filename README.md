@@ -2,9 +2,10 @@
 
 A production-ready RESTful API built with **Express.js** for managing user authentication and full User CRUD. Uses Drizzle ORM with a **Neon PostgreSQL** (serverless) database, Docker for containerized deployments, and GitHub Actions for CI/CD.
 
-[![Lint & Format](https://github.com/Prabhatvrma1/aquisitions/actions/workflows/lint-and-format.yml/badge.svg)](https://github.com/Prabhatvrma1/aquisitions/actions/workflows/lint-and-format.yml)
-[![Tests](https://github.com/Prabhatvrma1/aquisitions/actions/workflows/tests.yml/badge.svg)](https://github.com/Prabhatvrma1/aquisitions/actions/workflows/tests.yml)
-[![Docker Build & Push](https://github.com/Prabhatvrma1/aquisitions/actions/workflows/docker-build-and-push.yml/badge.svg)](https://github.com/Prabhatvrma1/aquisitions/actions/workflows/docker-build-and-push.yml)
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployed-black?style=flat&logo=vercel)](https://production-ready-node-api.vercel.app)
+[![Lint & Format](https://github.com/Prabhatvrma1/production-ready-node-api/actions/workflows/lint-and-format.yml/badge.svg)](https://github.com/Prabhatvrma1/production-ready-node-api/actions/workflows/lint-and-format.yml)
+[![Tests](https://github.com/Prabhatvrma1/production-ready-node-api/actions/workflows/tests.yml/badge.svg)](https://github.com/Prabhatvrma1/production-ready-node-api/actions/workflows/tests.yml)
+[![Docker Build & Push](https://github.com/Prabhatvrma1/production-ready-node-api/actions/workflows/docker-build-and-push.yml/badge.svg)](https://github.com/Prabhatvrma1/production-ready-node-api/actions/workflows/docker-build-and-push.yml)
 [![Docker Hub](https://img.shields.io/docker/v/prabhatsoni16/aquisitions?label=Docker%20Hub)](https://hub.docker.com/r/prabhatsoni16/aquisitions)
 
 ---
