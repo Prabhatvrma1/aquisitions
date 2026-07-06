@@ -7,9 +7,9 @@ const landingPage = `<!DOCTYPE html>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: #111827;
-            --accent-glow: radial-gradient(circle at top, rgba(99, 102, 241, 0.15), transparent 80%);
+            --bg-color: #000000;
+            --card-bg: #0a0a0a;
+            --accent-glow: radial-gradient(circle at top, rgba(99, 102, 241, 0.08), transparent 80%);
             --text-primary: #f3f4f6;
             --text-secondary: #9ca3af;
             --primary: #6366f1;
@@ -40,11 +40,11 @@ const landingPage = `<!DOCTYPE html>
             max-width: 650px;
             width: 90%;
             padding: 2.5rem;
-            background: rgba(17, 24, 39, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(10, 10, 10, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 24px;
             backdrop-filter: blur(16px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
             text-align: center;
             position: relative;
             animation: fadeIn 0.8s ease-out;
